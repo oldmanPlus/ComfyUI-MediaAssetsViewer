@@ -1,0 +1,329 @@
+/**
+ * MediaAssetsViewer 全局样式
+ *
+ * 复用 ComfyUI 的 CSS 变量，自动适配深色/浅色主题。
+ * 布局参照 ComfyUI 原生 AssetsSidebarTab：
+ *   root → header(filter+tabs) → body(grid/list) → footer(selection)
+ */
+
+.mav-root {
+  --mav-gap: 8px;
+  /* 卡片最小宽度：放大缩略图 */
+  --mav-card-min: 200px;
+  --mav-border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  color: var(--fg-color, #e0e0e0);
+  background: var(--bg-color, #1a1a1a);
+  font-size: 13px;
+}
+
+/* ============ 头部区：标题 + FilterBar + Tab ============ */
+.mav-header {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 标题栏（原生 SidebarTabTemplate 的 title） */
+.mav-title {
+  padding: 10px 12px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg-color, #e0e0e0);
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-color, #333);
+}
+
+/* Tab 切换栏（独立容器，带底部边框） */
+.mav-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color, #333);
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+.mav-tab {
+  flex: 1;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--input-text-color, #888);
+  cursor: pointer;
+  font-size: 13px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s;
+}
+.mav-tab:hover {
+  color: var(--fg-color, #e0e0e0);
+}
+.mav-tab.active {
+  color: var(--fg-color, #e0e0e0);
+  border-bottom-color: var(--primary-color, #4a9eff);
+}
+
+/* ============ 内容区 ============ */
+.mav-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 网格视图 */
+.mav-grid-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  position: relative;
+}
+.mav-grid-inner {
+  /* 按原生 gridTemplateColumns: repeat(auto-fill, minmax(160px, 1fr)) */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--mav-card-min), 1fr));
+  gap: var(--mav-gap);
+  padding: var(--mav-gap);
+  box-sizing: border-box;
+  width: 100%;
+}
+.mav-grid-spacer {
+  width: 100%;
+}
+
+/* ============ 卡片（scoped 在 AssetCard.vue，这里只放兼容样式） ============ */
+.mav-card[draggable="true"]:active {
+  opacity: 0.6;
+}
+
+/* ============ 列表视图 ============ */
+.mav-list-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+}
+.mav-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-color, #2a2a2a);
+  cursor: pointer;
+  user-select: none;
+}
+.mav-list-item:hover {
+  background: var(--tr-bg-color, rgba(255, 255, 255, 0.05));
+}
+.mav-list-item.selected {
+  background: rgba(74, 158, 255, 0.15);
+}
+.mav-list-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mav-list-name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mav-list-meta {
+  font-size: 11px;
+  color: var(--input-text-color-muted, #888);
+  display: flex;
+  gap: 8px;
+}
+
+/* ============ 空状态 ============ */
+.mav-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--input-text-color-muted, #888);
+  text-align: center;
+  gap: 8px;
+}
+.mav-empty-icon {
+  font-size: 40px;
+  opacity: 0.5;
+}
+.mav-empty-title {
+  font-size: 15px;
+  color: var(--fg-color, #ccc);
+}
+.mav-empty-desc {
+  font-size: 12px;
+}
+
+/* ============ 骨架屏 ============ */
+.mav-skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--mav-card-min), 1fr));
+  gap: var(--mav-gap);
+  padding: var(--mav-gap);
+}
+.mav-skeleton-card {
+  aspect-ratio: 1;
+  border-radius: var(--mav-border-radius);
+  background: linear-gradient(
+    90deg,
+    var(--input-bg-color, #2a2a2a) 0%,
+    var(--tr-bg-color, rgba(255, 255, 255, 0.05)) 50%,
+    var(--input-bg-color, #2a2a2a) 100%
+  );
+  background-size: 200% 100%;
+  animation: mav-shimmer 1.5s infinite;
+}
+@keyframes mav-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============ 灯箱 ============ */
+.mav-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+.mav-lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.mav-lightbox-media {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+}
+.mav-lightbox-info {
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+}
+.mav-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mav-lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.mav-lightbox-nav.prev { left: 20px; }
+.mav-lightbox-nav.next { right: 20px; }
+.mav-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.mav-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ============ 右键菜单 ============ */
+.mav-context-menu {
+  position: fixed;
+  background: var(--comfy-menu-bg, #1e1e1e);
+  border: 1px solid var(--border-color, #444);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  z-index: 10001;
+  min-width: 160px;
+}
+.mav-context-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  color: var(--fg-color, #e0e0e0);
+  font-size: 13px;
+  white-space: nowrap;
+}
+.mav-context-item:hover {
+  background: var(--tr-bg-color, rgba(255, 255, 255, 0.08));
+}
+.mav-context-item.danger {
+  color: #ff6b6b;
+}
+.mav-context-item.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.mav-context-divider {
+  height: 1px;
+  background: var(--border-color, #333);
+  margin: 4px 0;
+}
+
+/* ============ 多选栏 ============ */
+.mav-selection-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--comfy-menu-bg, #1e1e1e);
+  border-top: 1px solid var(--border-color, #333);
+  flex-shrink: 0;
+}
+.mav-selection-count {
+  flex: 1;
+  font-size: 13px;
+  color: var(--fg-color, #e0e0e0);
+}
+
+/* ============ 滚动条 ============ */
+.mav-grid-scroll::-webkit-scrollbar,
+.mav-list-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.mav-grid-scroll::-webkit-scrollbar-track,
+.mav-list-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mav-grid-scroll::-webkit-scrollbar-thumb,
+.mav-list-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-color, #444);
+  border-radius: 4px;
+}
+.mav-grid-scroll::-webkit-scrollbar-thumb:hover,
+.mav-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--input-text-color-muted, #666);
+}

@@ -1,0 +1,14 @@
+[project]
+name = "comfyui-media-assets-viewer"
+version = "0.1.0"
+description = "本地媒体资产浏览器，复刻原生媒体资产 UI，支持查看历史生成内容"
+requires-python = ">=3.10"
+dependencies = []
+authors = [{ name = "MediaAssetsViewer" }]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["mav_backend"]

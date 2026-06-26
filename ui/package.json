@@ -1,0 +1,20 @@
+{
+  "name": "comfyui-media-assets-viewer-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "build:dev": "vite build --mode development"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  }
+}

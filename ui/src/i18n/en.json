@@ -1,0 +1,66 @@
+{
+  "title": "Media Files",
+  "label": "Media",
+  "tooltip": "Browse generated and imported media files (with history)",
+  "tab": {
+    "output": "Generated",
+    "input": "Imported"
+  },
+  "filter": {
+    "search": "Search filename",
+    "all": "All",
+    "image": "Image",
+    "video": "Video",
+    "audio": "Audio",
+    "sort": {
+      "title": "Sort",
+      "date-desc": "Newest first",
+      "date-asc": "Oldest first",
+      "name-asc": "Name A-Z",
+      "name-desc": "Name Z-A",
+      "size-desc": "Largest first"
+    }
+  },
+  "view": {
+    "grid": "Grid view",
+    "list": "List view"
+  },
+  "empty": {
+    "title": "No files",
+    "desc": "No media files in this directory yet",
+    "noResults": "No matching files"
+  },
+  "loading": "Loading...",
+  "contextMenu": {
+    "inspect": "Inspect",
+    "addToWorkflow": "Add to workflow",
+    "download": "Download",
+    "openWorkflow": "Open workflow",
+    "exportWorkflow": "Export workflow",
+    "copyFilename": "Copy filename",
+    "delete": "Delete"
+  },
+  "selection": {
+    "count": "{n} selected",
+    "downloadAll": "Download selected",
+    "deleteAll": "Delete selected",
+    "clear": "Clear selection"
+  },
+  "lightbox": {
+    "prev": "Previous",
+    "next": "Next",
+    "close": "Close"
+  },
+  "toast": {
+    "deleted": "Deleted {name}",
+    "deleteFailed": "Delete failed: {name}",
+    "copied": "Filename copied",
+    "downloaded": "Downloaded {name}",
+    "noWorkflow": "No workflow metadata embedded in this file",
+    "workflowOpened": "Workflow loaded to canvas",
+    "workflowExported": "Workflow exported"
+  },
+  "title": "Media",
+  "label": "Media",
+  "tooltip": "Browse generated and imported media files (with history)"
+}
