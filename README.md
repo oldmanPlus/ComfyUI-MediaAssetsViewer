@@ -66,6 +66,7 @@
 
 > TODO：发布前补充以下截图
 <img width="495" height="471" alt="Image" src="https://github.com/user-attachments/assets/8f778465-4367-4f7d-90c7-e14173e6ad60" />
+
 > - 侧边栏入口与主界面
 > - 网格视图 + 多选状态
 > - 灯箱预览
